@@ -1,0 +1,27 @@
+button{
+    background-color: #15c3f8;
+    font-weight: bold;
+    color: white;
+    padding: 5px;
+    margin: 10px 60px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+fieldset{
+    margin-left: 20px;
+    width: 220px;
+}
+
+legend{
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
