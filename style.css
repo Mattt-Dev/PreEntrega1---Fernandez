@@ -1,4 +1,10 @@
-button{
+body {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: BakBak One;
+}
+
+button {
     background-color: #15c3f8;
     font-weight: bold;
     color: white;
@@ -6,22 +12,69 @@ button{
     margin: 10px 60px;
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
 }
 
-fieldset{
+fieldset {
     margin-left: 20px;
     width: 220px;
 }
 
-legend{
+legend {
     font-weight: bold;
     margin-left: 10px;
 }
 
-form{
+form {
     display: flex;
     justify-content: center;
     margin: 10px;
 }
+
+header {
+    height: 100px;
+    background-color: #003141;
+}
+
+main{
+    margin: 10px;
+}
+#logo {
+    width: 350px;
+    margin: 0 auto;
+}
+
+.infoCuenta{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.cuentas{
+    width: 300px;
+    border: 2px solid gray;
+    margin: 50px;
+    padding: 10px;
+}
+
+#accionElegida{
+    width: 500px;
+    height: 50px;
+    margin-top: 20px;
+}
+
+.acciones{
+    display: flex;
+    margin: 10px;
+}
+
+#mensajeError{
+    color: red;
+    background-color: rgb(51, 51, 51);
+    max-width: 350px;
+}
+
+#btn-salir{
+    background-color: red;
+}
+

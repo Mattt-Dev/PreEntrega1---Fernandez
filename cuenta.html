@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informacion de Cuenta - MonFlex</title>
+    <link rel="stylesheet" href="style.css">    
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="/assets/monflex.png" alt="">
+        </div>
+    </header>
+    <main>
+        <div>
+            <h1>INFORMACION DE CUENTA</h1>
+        </div>
+        <div>
+            <div class="cuentas">
+                <H2>PESOS</H2>
+                <p id="saldoEnPesos"></p>
+            </div>
+            <div class="cuentas">
+                <H2>DOLARES</H2>
+                <p id="saldoEnDolares"></p>                
+            </div>
+        </div>
+        <div class="acciones">
+            <h2>OPCIONES</h2>
+            <div class="opciones">
+                    <button onclick="ingresarDinero()">Ingresar Dinero</button>
+                    <br>
+                    <button onclick="retirarDinero()">Retirar Dinero</button>
+                    <br>
+                    <button onclick="verMovimientos()">Ver Movimientos</button>
+                    <br>
+                    <a href="index.html" ><button id="btn-salir">Salir</button></a>
+            </div>
+
+            <section id="accionElegida"> </section>
+        </div>
+    </main>
+    
+    <script src="main.js"></script>
+</body>
+</html>

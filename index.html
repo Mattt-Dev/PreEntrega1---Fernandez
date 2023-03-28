@@ -4,20 +4,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio de Sesion - MonFlex</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-        <form action="">
+    <header>
+        <div id="logo">
+            <img src="/assets/monflex.png" alt="">
+        </div>
+    </header>
+    <div id="inicioSesion">
+        <form>
             <fieldset>
-                <legend>Simulador - Banco MonFlex</legend>
+                <legend style="margin: 0 auto;">Inicio de Sesion</legend>
             <div>
-                <button id="inicioSesion">Inicio Sesion</button>
+                <label for="usuario">Nombre de Usuario</label>
+                <input type="text" id="usuario">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password">
+                <button type="submit" onclick="iniciarSesion()">Inicio Sesion</button>
             </div>
             </fieldset>
         </form>
-    </div>
+    </div>    
     <script src="main.js"></script>
 </body>
 </html>
