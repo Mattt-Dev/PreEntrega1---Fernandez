@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,26 +8,31 @@
     <title>Inicio de Sesion - MonFlex</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <header>
         <div id="logo">
-            <img src="/assets/monflex.png" alt="">
+            <img src="/assets/monflex-logo.png" alt="">
         </div>
     </header>
     <div id="inicioSesion">
         <form>
             <fieldset>
                 <legend style="margin: 0 auto;">Inicio de Sesion</legend>
-            <div>
-                <label for="usuario">Nombre de Usuario</label>
-                <input type="text" id="usuario">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password">
-                <button type="submit" onclick="iniciarSesion()">Inicio Sesion</button>
-            </div>
+                <div>
+                    <label for="usuario">Nombre de Usuario</label>
+                    <input type="text" id="usuario">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password">
+                    <button type="submit" onclick="iniciarSesion()">Inicio Sesion</button>
+                </div>
             </fieldset>
         </form>
-    </div>    
+    </div>
+    
     <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
 </body>
+
 </html>

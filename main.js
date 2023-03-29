@@ -1,27 +1,22 @@
 let saldoPesos = JSON.parse(localStorage.getItem("saldoPesos")) || 0;
 let saldoDolares = JSON.parse(localStorage.getItem("saldoDolares")) || 0;
 let operaciones = JSON.parse(localStorage.getItem("operaciones")) || 0;
-let ultimosMovimientos = JSON.parse(localStorage.getItem("ultimosMovimientos")) || [];
+let ultimosMovimientos =
+  JSON.parse(localStorage.getItem("ultimosMovimientos")) || [];
 let accionElegida = document.querySelector("#accionElegida");
 let pesos = document.querySelector("#saldoEnPesos");
 let dolares = document.querySelector("#saldoEnDolares");
 pesos.innerHTML = `$ ${saldoPesos}`;
 dolares.innerHTML = `$ ${saldoDolares}`;
 
-// const btnInicioSesion = document.querySelector("#btn-inicioSesion");
-// btnInicioSesion.onclick = () => {
-//   iniciarSesion()
-// }
-
-function iniciarSesion() { 
-  event.preventDefault()
+function iniciarSesion() {
+  event.preventDefault();
   let nombre = document.querySelector("#usuario").value;
   let password = document.querySelector("#password").value;
   if (nombre == "" || nombre == null || password == "" || password == null) {
     alert("Los datos son incorrectos. Vuelva a intentarlo.");
   } else {
-    alert("Bienvenido " + nombre + ". Presione OK para continuar.");
-    window.location.href = "./cuenta.html";
+    alertInicioSesion(nombre);
   }
 }
 
@@ -35,14 +30,13 @@ function ingresarDinero() {
                                                       </select>
                                                       <label>Cantidad: </label>
                                                       <input type="number" id="cantidad">
-                                                      <p id="mensajeError"> </p>
                                                       <button id="ingresar">Ingresar</button>
                                                       </div>`;
-  
+
   document.querySelector("#ingresar").addEventListener("click", () => {
     let cantidad = document.querySelector("#cantidad").value;
     let tipoDeMoneda = document.querySelector("#moneda").value;
-    Deposito(cantidad, tipoDeMoneda);    
+    Deposito(cantidad, tipoDeMoneda);
   });
 }
 
@@ -56,14 +50,13 @@ function retirarDinero() {
                                                       </select>
                                                       <label>Cantidad: </label>
                                                       <input type="number" id="cantidad">
-                                                      <p id="mensajeError"> </p>
-                                                      <button id="ingresar">Ingresar</button>
+                                                      <button id="ingresar">Retirar</button>
                                                       </div>`;
 
   document.querySelector("#ingresar").addEventListener("click", () => {
     let cantidad = document.querySelector("#cantidad").value;
     let tipoDeMoneda = document.querySelector("#moneda").value;
-    Extraccion(cantidad, tipoDeMoneda);    
+    Extraccion(cantidad, tipoDeMoneda);
   });
 }
 
@@ -72,9 +65,9 @@ function verMovimientos() {
     accionElegida.innerHTML = `<div id="movimientos"> ULTIMOS MOVIMIENTOS:
                                                       </div>`;
     cargarDeLocalStorage();
-   }  
-  else {
-    accionElegida.innerHTML = "No se han realizado operaciones. Vuelva a intentarlo";
+  } else {
+    accionElegida.innerHTML =
+      "No se han realizado operaciones. Vuelva a intentarlo";
   }
 }
 
@@ -85,7 +78,10 @@ function Movimientos(moneda, operacion, importe) {
 }
 
 function guardarEnLocalStorage() {
-  localStorage.setItem("ultimosMovimientos", JSON.stringify(ultimosMovimientos));
+  localStorage.setItem(
+    "ultimosMovimientos",
+    JSON.stringify(ultimosMovimientos)
+  );
   localStorage.setItem("saldoPesos", JSON.stringify(saldoPesos));
   localStorage.setItem("saldoDolares", JSON.stringify(saldoDolares));
   localStorage.setItem("operaciones", JSON.stringify(operaciones));
@@ -93,7 +89,7 @@ function guardarEnLocalStorage() {
 
 function cargarDeLocalStorage() {
   let movimientos = JSON.parse(localStorage.getItem("ultimosMovimientos"));
-  let ultimosMovimientos = movimientos.slice(-3)
+  let ultimosMovimientos = movimientos.slice(-3);
   ultimosMovimientos.forEach((movimiento) => {
     let div = document.createElement("ul");
     div.innerHTML = `<li> Se realizo un <strong>${movimiento.operacion}</strong> en <strong>${movimiento.moneda}</strong> por el valor de <strong>$${movimiento.importe}</strong>.</li>`;
@@ -101,92 +97,103 @@ function cargarDeLocalStorage() {
   });
 }
 
-function limpiarLocalStorage() {
-  localStorage.clear();
-}
-
 function Deposito(cantidad, tipoDeMoneda) {
-  if (parseFloat(cantidad) > 0) {
-      switch (tipoDeMoneda) {
-        case "pesos":
-          saldoPesos += parseFloat(cantidad);
-          pesos.innerHTML =
-            `$${saldoPesos}`;
-          accionElegida.innerHTML = "La operacion ha sido realizada con exito"; 
-          ultimosMovimientos.push(
-            new Movimientos("Pesos", "Deposito", cantidad));
-          operaciones++;
-            guardarEnLocalStorage();
-          setTimeout(() => {
-            accionElegida.innerHTML = "";
-          }, 1500)
-          break;
-        case "dolares":
-          saldoDolares += parseFloat(cantidad);
-          dolares.innerHTML =
-            `$${saldoDolares}`;
-          accionElegida.innerHTML = "La operacion ha sido realizada con exito";      
-          ultimosMovimientos.push(
-            new Movimientos("Dolares", "Deposito", cantidad)
-          );
-          operaciones++;
-          guardarEnLocalStorage();
-          setTimeout(() => {
-            accionElegida.innerHTML = "";
-          }, 1500);
-          break;
-      }
-    } else {
-        document.querySelector("#mensajeError").innerHTML =
-       "El monto ingresado es incorrecto. Vuelva a intentarlo.";
-    }
-};
-  
-function Extraccion(cantidad, tipoDeMoneda) {
   if (parseFloat(cantidad) > 0) {
     switch (tipoDeMoneda) {
       case "pesos":
+        saldoPesos += parseFloat(cantidad);
+        pesos.innerHTML = `$${saldoPesos}`;
+        ultimosMovimientos.push(new Movimientos("Pesos", "Deposito", cantidad));
+        operaciones++;
+        guardarEnLocalStorage();
+        alertOperacion();
+        break;
+      case "dolares":
+        saldoDolares += parseFloat(cantidad);
+        dolares.innerHTML = `$${saldoDolares}`;
+        ultimosMovimientos.push(
+          new Movimientos("Dolares", "Deposito", cantidad)
+        );
+        operaciones++;
+        guardarEnLocalStorage();
+        alertOperacion();
+        break;
+    }
+  } else {
+    alertError();
+  }
+}
+
+function Extraccion(cantidad, tipoDeMoneda) {
+  switch (tipoDeMoneda) {
+    case "pesos":
+      if (parseFloat(cantidad) >= 1) {
         if (saldoPesos >= parseFloat(cantidad)) {
           saldoPesos -= parseFloat(cantidad);
-          let saldoEnPesos = document.querySelector("#saldoEnPesos");
-          saldoEnPesos.innerHTML =
-            `$${saldoPesos}`;
-          accionElegida.innerHTML = "La operacion ha sido realizada con exito";
           ultimosMovimientos.push(new Movimientos("Pesos", "Retiro", cantidad));
           operaciones++;
           guardarEnLocalStorage();
-          setTimeout(() => {
-            accionElegida.innerHTML = "";
-          }, 1500);
+          pesos.innerHTML = `$${saldoPesos}`;
+          alertOperacion();
           break;
         } else {
-          document.querySelector("#mensajeError").innerHTML =
-            "No hay saldo suficiente. Vuelva a intentarlo.";
+          alertError();
+          break;
         }
-
-      case "dolares":
+      } else {
+        alertError();
+        break;
+      }
+    case "dolares":
+      if (parseFloat(cantidad) >= 1) {
         if (saldoDolares >= parseFloat(cantidad)) {
           saldoDolares -= parseFloat(cantidad);
-          let saldoEnDolares = document.querySelector("#saldoEnDolares");
-          saldoEnDolares.innerHTML =
-            `$${saldoDolares}`;
-          accionElegida.innerHTML = "La operacion ha sido realizada con exito";
           ultimosMovimientos.push(
             new Movimientos("Dolares", "Retiro", cantidad)
           );
           operaciones++;
           guardarEnLocalStorage();
-          setTimeout(() => {
-            accionElegida.innerHTML = "";
-          }, 1500);
+          dolares.innerHTML = `$${saldoDolares}`;
+          alertOperacion();
           break;
         } else {
-          document.querySelector("#mensajeError").innerHTML =
-            "No hay saldo suficiente. Vuelva a intentarlo";
+          alertError();
         }
-    }
-  } else {
-    document.querySelector("#mensajeError").innerHTML =
-      "El valor ingresado no es correcto. Vuelva a intentarlo.";
+      } else {
+        alertError();
+        break;
+      }
   }
+}
+
+function alertInicioSesion(nombre) {
+  Swal.fire({
+    icon: "info",
+    title: `Bienvenido ${nombre}`,
+    text: "Inicio de sesión exitoso.",
+    timer: 1500,
+  }).then(() => {
+    window.location.href = "cuenta.html";
+  });
+}
+
+function alertOperacion() {
+  Swal.fire({
+    icon: "success",
+    title: "Transaccion Exitosa",
+    timer: 1500,
+  }).then(() => {
+    accionElegida.innerHTML = "";
+  });
+}
+
+function alertError() {
+  Swal.fire({
+    icon: "error",
+    title: "Transaccion Fallida",
+    text: "No se puede realizar la operacion. Vuelva a intentarlo.",
+    timer: 1500,
+  }).then(() => {
+    accionElegida.innerHTML = "";
+  });
 }
