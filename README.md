@@ -9,3 +9,7 @@
   
 ## v 1.1
 - Se agrega la funcionalidad de consultar ultimos movimientos realizados, mediante un array de objetos que guarda la informacion de las operaciones de Depositos/Retiros realizadas.
+- Se agrega la funcionalidad de consultar ultimos movimientos realizados, mediante un array de objetos que guarda la informacion de las operaciones de Depositos/Retiros realizadas.
+
+## v 1.2
+- Se aplica reestructuracion del HTML, eliminando entradas por prompt y salidas por alert. Se utiliza interfaz con botones que permiten realizar acciones de ingreso y retiro de dinero, y consulta de ultimos movimientos como datos recuperados a traves del localStorage, para permitir la persistencia de los mismos.
