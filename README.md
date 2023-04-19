@@ -13,3 +13,6 @@
 
 ## v 1.2
 - Se aplica reestructuracion del HTML, eliminando entradas por prompt y salidas por alert. Se utiliza interfaz con botones que permiten realizar acciones de ingreso y retiro de dinero, y consulta de ultimos movimientos como datos recuperados a traves del localStorage, para permitir la persistencia de los mismos.
+
+## v 1.3
+- Se agrega una consulta de cotizacion local del Dolar Oficial y Dolar Blue, mediante el uso de API.
