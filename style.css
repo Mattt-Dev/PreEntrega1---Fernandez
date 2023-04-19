@@ -45,9 +45,9 @@ main{
     margin: 0 auto;
 }
 
-.infoCuenta{
-    display: flex;
-    justify-content: space-evenly;
+#cotizaciones, #fecha{
+    width: 350px;
+    text-align: center;
 }
 
 .cuentas{

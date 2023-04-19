@@ -1,11 +1,15 @@
 let saldoPesos = JSON.parse(localStorage.getItem("saldoPesos")) || 0;
 let saldoDolares = JSON.parse(localStorage.getItem("saldoDolares")) || 0;
 let operaciones = JSON.parse(localStorage.getItem("operaciones")) || 0;
-let ultimosMovimientos =
-  JSON.parse(localStorage.getItem("ultimosMovimientos")) || [];
+let ultimosMovimientos = JSON.parse(localStorage.getItem("ultimosMovimientos")) || [];
 let accionElegida = document.querySelector("#accionElegida");
 let pesos = document.querySelector("#saldoEnPesos");
 let dolares = document.querySelector("#saldoEnDolares");
+let dolarBlue = document.querySelector("#valorDolarBlue");
+let dolarOficial = document.querySelector("#valorDolarOficial");
+document.querySelector("#fecha").innerHTML = new Date().toLocaleDateString("es-ES");
+
+valorDolarBlue();
 pesos.innerHTML = `$ ${saldoPesos}`;
 dolares.innerHTML = `$ ${saldoDolares}`;
 
@@ -78,10 +82,7 @@ function Movimientos(moneda, operacion, importe) {
 }
 
 function guardarEnLocalStorage() {
-  localStorage.setItem(
-    "ultimosMovimientos",
-    JSON.stringify(ultimosMovimientos)
-  );
+  localStorage.setItem("ultimosMovimientos",JSON.stringify(ultimosMovimientos));
   localStorage.setItem("saldoPesos", JSON.stringify(saldoPesos));
   localStorage.setItem("saldoDolares", JSON.stringify(saldoDolares));
   localStorage.setItem("operaciones", JSON.stringify(operaciones));
@@ -197,3 +198,16 @@ function alertError() {
     accionElegida.innerHTML = "";
   });
 }
+
+function valorDolarBlue() {
+ fetch("https://www.dolarsi.com/api/api.php?type=valoresprincipales")
+   .then((res) => res.json())
+   .then((data) => {
+     dolarOficial.innerHTML = `$${data[0].casa.venta}`;
+     dolarBlue.innerHTML = `$${data[1].casa.venta}`;
+   });
+   setInterval(() => {
+     valorDolarBlue();
+   }, 120000)
+}
+ 
